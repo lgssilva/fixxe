@@ -6,12 +6,14 @@ import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { C, MAT_COLOR, ALL_PRODUCTS } from "@/app/lib/tokens";
 import type { Material, Category } from "@/app/lib/tokens";
+import { useCart } from "@/app/context/CartContext";
 
 const CATS: Category[] = ["Decoração & Arte", "Organização", "Ferramentas", "Personalizado"];
 const MATS: Material[] = ["PLA", "PETG", "ABS", "Resina"];
 const PAGE_SIZE = 9;
 
 export default function ProdutosPage() {
+  const { addToCart } = useCart();
   const [cats, setCats] = useState<Category[]>([]);
   const [mats, setMats] = useState<Material[]>([]);
   const [priceMax, setPriceMax] = useState(500);
@@ -179,7 +181,7 @@ export default function ProdutosPage() {
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <span style={{ fontSize: "18px", fontWeight: 700, color: C.dark }}>{p.price.toFixed(2)} €</span>
                         <button
-                          onClick={(e) => { e.preventDefault(); }}
+                          onClick={(e) => { e.preventDefault(); e.stopPropagation(); addToCart(p); }}
                           style={{ backgroundColor: C.orange, color: "#fff", border: "none", width: "36px", height: "36px", borderRadius: "8px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
                           className="btn-primary"
                         >

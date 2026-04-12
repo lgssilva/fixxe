@@ -6,12 +6,14 @@ import { useParams } from "next/navigation";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 import { C, MAT_COLOR, ALL_PRODUCTS } from "@/app/lib/tokens";
+import { useCart } from "@/app/context/CartContext";
 
 const PLACEHOLDER_IMGS = ["#e8e5e1", "#ddd9d4", "#e2ddd8", "#ede9e4"];
 
 export default function ProdutoDetalhe() {
   const { slug } = useParams<{ slug: string }>();
   const product = ALL_PRODUCTS.find((p) => p.slug === slug) ?? ALL_PRODUCTS[0];
+  const { addToCart } = useCart();
   const [activeImg, setActiveImg] = useState(0);
   const [qty, setQty] = useState(1);
 
@@ -115,7 +117,7 @@ export default function ProdutoDetalhe() {
 
               {/* Botões */}
               <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "32px" }}>
-                <button className="btn-primary" style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "14px", borderRadius: "10px", fontWeight: 700, fontSize: "16px", cursor: "pointer" }}>
+                <button className="btn-primary" onClick={() => addToCart(product, qty)} style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "14px", borderRadius: "10px", fontWeight: 700, fontSize: "16px", cursor: "pointer" }}>
                   Adicionar ao carrinho
                 </button>
                 <button className="btn-dark" style={{ backgroundColor: C.dark, color: "#fff", border: "none", padding: "14px", borderRadius: "10px", fontWeight: 700, fontSize: "16px", cursor: "pointer" }}>

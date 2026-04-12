@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
+import { CartProvider } from "@/app/context/CartContext";
 import {
   organizationSchema,
   websiteSchema,
@@ -118,7 +119,7 @@ export default function RootLayout({
           </noscript>
         )}
 
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
