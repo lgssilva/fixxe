@@ -34,30 +34,97 @@ function Toast({ visible }: { visible: boolean }) {
   );
 }
 
+function FocusInput(props: React.InputHTMLAttributes<HTMLInputElement> & { error?: string }) {
+  const [focused, setFocused] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { error, style: _s, ...rest } = props;
+  const hasError = Boolean(error);
+  const base: React.CSSProperties = {
+    width: "100%", padding: "11px 14px", borderRadius: "9px",
+    border: `1px solid ${hasError ? "#e05555" : focused ? O : BORDER}`,
+    fontSize: "14px", color: DARK, backgroundColor: "#fff",
+    boxSizing: "border-box", outline: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    boxShadow: focused ? (hasError ? "0 0 0 3px rgba(224,85,85,0.12)" : `0 0 0 3px rgba(238,146,77,0.15)`) : "none",
+  };
+  return (
+    <>
+      <input {...rest} style={base} onFocus={e => { setFocused(true); rest.onFocus?.(e); }} onBlur={e => { setFocused(false); rest.onBlur?.(e); }} />
+      {hasError && <p style={{ fontSize: "11px", color: "#e05555", margin: "4px 0 0" }}>{error}</p>}
+    </>
+  );
+}
+
+function FocusSelect(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  const [focused, setFocused] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { style: _s, ...rest } = props;
+  const base: React.CSSProperties = {
+    width: "100%", padding: "11px 14px", borderRadius: "9px",
+    border: `1px solid ${focused ? O : BORDER}`,
+    fontSize: "14px", color: DARK, backgroundColor: "#fff",
+    boxSizing: "border-box", outline: "none",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    boxShadow: focused ? `0 0 0 3px rgba(238,146,77,0.15)` : "none",
+  };
+  return <select {...rest} style={base} onFocus={e => { setFocused(true); rest.onFocus?.(e); }} onBlur={e => { setFocused(false); rest.onBlur?.(e); }} />;
+}
+
+function FocusTextarea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement> & { error?: string }) {
+  const [focused, setFocused] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { error, style: _s, ...rest } = props;
+  const hasError = Boolean(error);
+  const base: React.CSSProperties = {
+    width: "100%", padding: "11px 14px", borderRadius: "9px",
+    border: `1px solid ${hasError ? "#e05555" : focused ? O : BORDER}`,
+    fontSize: "14px", color: DARK, backgroundColor: "#fff",
+    boxSizing: "border-box", outline: "none", resize: "vertical", lineHeight: 1.6,
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+    boxShadow: focused ? (hasError ? "0 0 0 3px rgba(224,85,85,0.12)" : `0 0 0 3px rgba(238,146,77,0.15)`) : "none",
+  };
+  return (
+    <>
+      <textarea {...rest} style={base} onFocus={e => { setFocused(true); rest.onFocus?.(e); }} onBlur={e => { setFocused(false); rest.onBlur?.(e); }} />
+      {hasError && <p style={{ fontSize: "11px", color: "#e05555", margin: "4px 0 0" }}>{error}</p>}
+    </>
+  );
+}
+
 export default function ContactoPage() {
   const [form, setForm] = useState({ nome: "", email: "", assunto: ASSUNTOS[0], mensagem: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading]   = useState(false);
   const [toastVisible, setToast] = useState(false);
 
   const set = (k: keyof typeof form) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       setForm(f => ({ ...f, [k]: e.target.value }));
+      if (errors[k]) setErrors(prev => { const n = { ...prev }; delete n[k]; return n; });
+    };
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.nome.trim()) e.nome = "Nome é obrigatório";
+    if (!form.email.trim()) e.email = "Email é obrigatório";
+    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = "Email inválido";
+    if (!form.mensagem.trim()) e.mensagem = "Mensagem é obrigatória";
+    else if (form.mensagem.trim().length < 10) e.mensagem = "Mensagem muito curta (mín. 10 caracteres)";
+    return e;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setToast(true);
       setForm({ nome: "", email: "", assunto: ASSUNTOS[0], mensagem: "" });
+      setErrors({});
       setTimeout(() => setToast(false), 4000);
     }, 1000);
-  };
-
-  const inp: React.CSSProperties = {
-    width: "100%", padding: "11px 14px", borderRadius: "9px",
-    border: `1px solid ${BORDER}`, fontSize: "14px", color: DARK,
-    backgroundColor: "#fff", boxSizing: "border-box", outline: "none",
   };
 
   return (
@@ -67,9 +134,9 @@ export default function ContactoPage() {
       <main style={{ backgroundColor: CREAM, minHeight: "100vh" }}>
         {/* Hero */}
         <div style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}`, padding: "48px 40px", textAlign: "center" }}>
-          <p style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 10px" }}>Fala connosco</p>
-          <h1 style={{ fontSize: "38px", fontWeight: 900, color: DARK, margin: "0 0 12px" }}>Contacto</h1>
-          <p style={{ fontSize: "16px", color: MUTED, margin: 0 }}>Respondemos a todas as mensagens em menos de 24 horas.</p>
+          <p className="animate-slide-up" style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 10px" }}>Fala connosco</p>
+          <h1 className="animate-slide-up-delay" style={{ fontSize: "38px", fontWeight: 900, color: DARK, margin: "0 0 12px" }}>Contacto</h1>
+          <p className="animate-slide-up-delay2" style={{ fontSize: "16px", color: MUTED, margin: 0 }}>Respondemos a todas as mensagens em menos de 24 horas.</p>
         </div>
 
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 40px", display: "grid", gridTemplateColumns: "1fr 380px", gap: "48px", alignItems: "start" }}>
@@ -80,37 +147,36 @@ export default function ContactoPage() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: DARK, marginBottom: "6px" }}>Nome completo *</label>
-                  <input required type="text" value={form.nome} onChange={set("nome")} placeholder="Maria Silva" style={inp} />
+                  <FocusInput type="text" value={form.nome} onChange={set("nome")} placeholder="Maria Silva" error={errors.nome} />
                 </div>
                 <div>
                   <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: DARK, marginBottom: "6px" }}>Email *</label>
-                  <input required type="email" value={form.email} onChange={set("email")} placeholder="maria@exemplo.pt" style={inp} />
+                  <FocusInput type="email" value={form.email} onChange={set("email")} placeholder="maria@exemplo.pt" error={errors.email} />
                 </div>
               </div>
 
               <div>
                 <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: DARK, marginBottom: "6px" }}>Assunto *</label>
-                <select required value={form.assunto} onChange={set("assunto")} style={inp}>
+                <FocusSelect value={form.assunto} onChange={set("assunto")}>
                   {ASSUNTOS.map(a => <option key={a}>{a}</option>)}
-                </select>
+                </FocusSelect>
               </div>
 
               <div>
                 <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: DARK, marginBottom: "6px" }}>Mensagem *</label>
-                <textarea
-                  required
+                <FocusTextarea
                   value={form.mensagem}
                   onChange={set("mensagem")}
                   rows={6}
                   placeholder="Descreve o que precisas..."
-                  style={{ ...inp, resize: "vertical", lineHeight: 1.6 }}
+                  error={errors.mensagem}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                style={{ backgroundColor: O, color: "#fff", border: "none", padding: "13px", borderRadius: "9px", fontWeight: 700, fontSize: "15px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}
+                style={{ backgroundColor: O, color: "#fff", border: "none", padding: "13px", borderRadius: "9px", fontWeight: 700, fontSize: "15px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", transition: "background-color 0.2s, transform 0.15s" }}
                 className="btn-primary"
               >
                 {loading ? (
@@ -130,7 +196,12 @@ export default function ContactoPage() {
               <h3 style={{ fontSize: "15px", fontWeight: 700, color: DARK, margin: "0 0 20px" }}>Informações de contacto</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {INFO.map(({ icon, label, valor }) => (
-                  <div key={label} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                  <div
+                    key={label}
+                    style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "10px 12px", borderRadius: "10px", transition: "background-color 0.2s ease" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = CREAM; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.backgroundColor = "transparent"; }}
+                  >
                     <span style={{ fontSize: "18px", flexShrink: 0, marginTop: "1px" }}>{icon}</span>
                     <div>
                       <p style={{ fontSize: "11px", fontWeight: 700, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 2px" }}>{label}</p>
@@ -145,9 +216,9 @@ export default function ContactoPage() {
                 <p style={{ fontSize: "12px", fontWeight: 700, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 12px" }}>Redes sociais</p>
                 <div style={{ display: "flex", gap: "10px" }}>
                   {["Instagram", "TikTok", "LinkedIn"].map(s => (
-                    <a key={s} href="#" style={{ padding: "7px 14px", borderRadius: "8px", border: `1px solid ${BORDER}`, backgroundColor: CREAM, fontSize: "12px", color: DARK, textDecoration: "none", fontWeight: 500 }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = O; (e.currentTarget as HTMLAnchorElement).style.color = O; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = BORDER; (e.currentTarget as HTMLAnchorElement).style.color = DARK; }}
+                    <a key={s} href="#" style={{ padding: "7px 14px", borderRadius: "8px", border: `1px solid ${BORDER}`, backgroundColor: CREAM, fontSize: "12px", color: DARK, textDecoration: "none", fontWeight: 500, transition: "border-color 0.2s, color 0.2s, transform 0.15s" }}
+                      onMouseEnter={e => { const el = e.currentTarget; el.style.borderColor = O; el.style.color = O; el.style.transform = "translateY(-1px)"; }}
+                      onMouseLeave={e => { const el = e.currentTarget; el.style.borderColor = BORDER; el.style.color = DARK; el.style.transform = ""; }}
                     >
                       {s}
                     </a>
@@ -156,9 +227,9 @@ export default function ContactoPage() {
               </div>
             </div>
 
-            {/* Mapa placeholder */}
-            <div style={{ backgroundColor: "#2a2521", borderRadius: "16px", height: "220px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "10px" }}>
-              <span style={{ fontSize: "32px" }}>📍</span>
+            {/* Mapa placeholder com pin animado */}
+            <div style={{ backgroundColor: "#2a2521", borderRadius: "16px", height: "220px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "10px", overflow: "hidden", position: "relative" }}>
+              <span className="map-pin" style={{ fontSize: "36px", display: "block" }}>📍</span>
               <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", margin: 0 }}>Cascais, Lisboa</p>
               <p style={{ fontSize: "12px", color: "#8a847e", margin: 0 }}>Portugal</p>
             </div>
@@ -173,7 +244,15 @@ export default function ContactoPage() {
         </div>
       </main>
 
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pinPulse {
+          0%, 100% { transform: translateY(0) scale(1); }
+          40%       { transform: translateY(-8px) scale(1.15); }
+          60%       { transform: translateY(-4px) scale(1.05); }
+        }
+        .map-pin { animation: pinPulse 2s cubic-bezier(0.4,0,0.2,1) infinite; }
+      `}</style>
       <Toast visible={toastVisible} />
       <Footer />
     </>

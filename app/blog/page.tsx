@@ -80,11 +80,11 @@ export default function BlogPage() {
         {/* Hero */}
         <section style={{ backgroundColor: "#fff", borderBottom: `1px solid ${BORDER}`, padding: "56px 40px", textAlign: "center" }}>
           <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-            <p style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 12px" }}>Blog & Novidades</p>
-            <h1 style={{ fontSize: "40px", fontWeight: 900, color: DARK, margin: "0 0 16px", lineHeight: 1.2 }}>
+            <p className="animate-slide-up" style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 12px" }}>Blog & Novidades</p>
+            <h1 className="animate-slide-up-delay" style={{ fontSize: "40px", fontWeight: 900, color: DARK, margin: "0 0 16px", lineHeight: 1.2 }}>
               Tudo sobre impressão 3D
             </h1>
-            <p style={{ fontSize: "16px", color: MUTED, lineHeight: 1.7, margin: 0 }}>
+            <p className="animate-slide-up-delay2" style={{ fontSize: "16px", color: MUTED, lineHeight: 1.7, margin: 0 }}>
               Tutoriais, comparações de materiais, projetos inspiradores e as últimas novidades do mundo da impressão 3D.
             </p>
           </div>
@@ -113,13 +113,25 @@ export default function BlogPage() {
           {/* Grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
             {filtered.map((art, i) => (
-              <article key={i} className="blog-card" style={{ backgroundColor: "#fff", borderRadius: "14px", border: `1px solid ${BORDER}`, overflow: "hidden" }}>
-                {/* Imagem placeholder */}
-                <div style={{ height: "200px", backgroundColor: "#e8e5e1", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c0bbb6" strokeWidth="1">
+              <article
+                key={i}
+                className="blog-card reveal"
+                style={{
+                  backgroundColor: "#fff",
+                  borderRadius: "14px",
+                  border: `1px solid ${BORDER}`,
+                  overflow: "hidden",
+                  animationDelay: `${i * 0.08}s`,
+                  transitionDelay: `${i * 0.08}s`,
+                }}
+              >
+                {/* Imagem placeholder com shimmer */}
+                <div style={{ height: "200px", backgroundColor: "#e8e5e1", display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+                  <div className="shimmer" style={{ position: "absolute", inset: 0 }} />
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c0bbb6" strokeWidth="1" style={{ position: "relative", zIndex: 1 }}>
                     <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
                   </svg>
-                  <span style={{ position: "absolute", top: "12px", left: "12px", backgroundColor: CAT_COLOR[art.cat], color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px" }}>
+                  <span style={{ position: "absolute", top: "12px", left: "12px", backgroundColor: CAT_COLOR[art.cat], color: "#fff", fontSize: "11px", fontWeight: 700, padding: "3px 10px", borderRadius: "20px", zIndex: 2 }}>
                     {art.cat}
                   </span>
                 </div>
@@ -133,7 +145,10 @@ export default function BlogPage() {
                   <p style={{ fontSize: "13px", color: MUTED, lineHeight: 1.6, margin: "0 0 16px", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
                     {art.resumo}
                   </p>
-                  <Link href="/blog/artigo" style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "13px", color: O, fontWeight: 600, textDecoration: "none" }}>
+                  <Link href="/blog/artigo" style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "13px", color: O, fontWeight: 600, textDecoration: "none", transition: "gap 0.2s ease" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.gap = "8px"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.gap = "4px"; }}
+                  >
                     Ler mais →
                   </Link>
                 </div>
@@ -148,6 +163,21 @@ export default function BlogPage() {
           )}
         </div>
       </main>
+
+      <style>{`
+        @keyframes shimmer {
+          0%   { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .shimmer::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+          animation: shimmer 1.6s infinite;
+        }
+        .blog-card.visible { opacity: 1; transform: translateY(0); }
+      `}</style>
 
       <Footer />
     </>

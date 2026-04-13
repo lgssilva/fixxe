@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import { Navbar as SharedNavbar } from "@/app/components/Navbar";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const C = {
@@ -64,39 +65,7 @@ function AnnouncementBar() {
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 function Navbar() {
-  return (
-    <nav style={{ backgroundColor: "#fff", borderBottom: `1px solid ${C.borderLight}`, padding: "0 40px", display: "flex", alignItems: "center", justifyContent: "space-between", height: "64px", position: "sticky", top: 0, zIndex: 100, boxShadow: "0 1px 12px rgba(0,0,0,0.06)" }}>
-      {/* Logo */}
-      <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-        <Image src="/logo-fixxe.svg" alt="Fixxe" width={86} height={32} priority />
-      </a>
-
-      {/* Links */}
-      <div style={{ display: "flex", gap: "32px" }}>
-        {["Loja", "Materiais", "Personalizado", "Sobre Nós", "Blog"].map(l => (
-          <a key={l} href="#" className="nav-link" style={{ color: C.darkMuted, textDecoration: "none", fontSize: "14px", fontWeight: 500 }}>{l}</a>
-        ))}
-      </div>
-
-      {/* Actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-        <a href="#" style={{ color: C.darkMuted, textDecoration: "none" }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-        </a>
-        <a href="#" style={{ color: C.darkMuted, textDecoration: "none", position: "relative" }}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
-          <span style={{ position: "absolute", top: "-6px", right: "-6px", backgroundColor: C.orange, color: "#fff", borderRadius: "50%", width: "16px", height: "16px", fontSize: "10px", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>0</span>
-        </a>
-        <button className="btn-primary" style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "9px 20px", borderRadius: "8px", fontWeight: 600, fontSize: "14px", cursor: "pointer" }}>
-          Começar →
-        </button>
-      </div>
-    </nav>
-  );
+  return <SharedNavbar />;
 }
 
 // ── Hero Slideshow ────────────────────────────────────────────────────────────
