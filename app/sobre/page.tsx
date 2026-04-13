@@ -11,16 +11,50 @@ const MUTED = "#6b6560";
 const CREAM = "#f5f4f2";
 const BORDER = "#e8e5e1";
 
-const VALORES = [
-  { icon: "⬡", title: "Qualidade", desc: "Cada peça passa por controlo rigoroso. Usamos apenas filamentos certificados e mantemos tolerâncias de ±0.2 mm." },
-  { icon: "◈", title: "Inovação",  desc: "Exploramos constantemente novos materiais, técnicas e geometrias para entregar soluções que ninguém mais consegue." },
-  { icon: "♻", title: "Sustentabilidade", desc: "Priorizamos PLA reciclável, minimizamos desperdício e usamos embalagens 100% reutilizáveis ou recicláveis." },
-];
+const IconMedal = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={O} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+  </svg>
+);
+const IconBulb = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={O} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+    <path d="M9 18h6"/><path d="M10 22h4"/>
+  </svg>
+);
+const IconHeart = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={O} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+  </svg>
+);
+const IconLeaf = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={O} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+  </svg>
+);
 
-const EQUIPA = [
-  { inicial: "L", nome: "Luís Gomes",  cargo: "Fundador & CEO",        bio: "Engenheiro apaixonado por tecnologia 3D desde 2018. Lidera a visão e estratégia da Fixxe." },
-  { inicial: "S", nome: "Sara Pinto",  cargo: "Designer de Produto",   bio: "Transforma ideias em modelos 3D precisos. Especializada em design paramétrico e prototipagem rápida." },
-  { inicial: "R", nome: "Rui Faria",   cargo: "Técnico de Impressão",  bio: "Garante a qualidade em cada impressão. Mais de 6 anos a operar impressoras FDM e SLA profissionais." },
+const VALORES = [
+  {
+    Icon: IconMedal,
+    title: "Qualidade sem compromisso",
+    desc: "Cada peça que sai do nosso atelier passa por rigorosos controlos de qualidade. Utilizamos apenas materiais certificados e equipamentos de precisão industrial para garantir que o resultado final supera sempre as tuas expectativas.",
+  },
+  {
+    Icon: IconBulb,
+    title: "Inovação constante",
+    desc: "Estamos sempre na vanguarda da impressão 3D. Testamos novos materiais, técnicas e acabamentos para oferecer soluções que ainda não existem no mercado português. A tua ideia merece o melhor da tecnologia atual.",
+  },
+  {
+    Icon: IconHeart,
+    title: "Compromisso com o cliente",
+    desc: "Do primeiro contacto à entrega final, estamos ao teu lado. Respondemos em menos de 24 horas, damos feedback em cada etapa e só ficamos satisfeitos quando tu ficas. A tua satisfação é a nossa maior conquista.",
+  },
+  {
+    Icon: IconLeaf,
+    title: "Sustentabilidade",
+    desc: "Acreditamos que a inovação e a responsabilidade ambiental andam de mãos dadas. Utilizamos filamentos reciclados sempre que possível, minimizamos o desperdício de material e compensamos a nossa pegada de carbono.",
+  },
 ];
 
 const NUMEROS = [
@@ -77,7 +111,6 @@ export default function SobrePage() {
   const heroRef    = useReveal();
   const missaoRef  = useReveal();
   const valoresRef = useReveal();
-  const equipaRef  = useReveal();
   const ctaRef     = useReveal();
 
   return (
@@ -131,8 +164,8 @@ export default function SobrePage() {
               <p style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 10px" }}>O que nos define</p>
               <h2 style={{ fontSize: "32px", fontWeight: 800, color: DARK, margin: 0 }}>Os nossos valores</h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
-              {VALORES.map(({ icon, title, desc }, i) => (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
+              {VALORES.map(({ Icon, title, desc }, i) => (
                 <div
                   key={title}
                   className={`reveal reveal-delay-${i + 1}`}
@@ -148,45 +181,11 @@ export default function SobrePage() {
                     (e.currentTarget as HTMLDivElement).style.boxShadow = "";
                   }}
                 >
-                  <div style={{ width: "48px", height: "48px", backgroundColor: "rgba(238,146,77,0.1)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "22px", marginBottom: "20px", transition: "background-color 0.25s ease" }}>
-                    {icon}
+                  <div style={{ width: "48px", height: "48px", backgroundColor: "rgba(238,146,77,0.1)", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                    <Icon />
                   </div>
                   <h3 style={{ fontSize: "18px", fontWeight: 700, color: DARK, margin: "0 0 10px" }}>{title}</h3>
                   <p style={{ fontSize: "14px", color: MUTED, lineHeight: 1.7, margin: 0 }}>{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Equipa */}
-        <section style={{ padding: "72px 40px", backgroundColor: "#fff" }}>
-          <div ref={equipaRef} className="reveal" style={{ maxWidth: "1100px", margin: "0 auto" }}>
-            <div style={{ textAlign: "center", marginBottom: "48px" }}>
-              <p style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 10px" }}>As pessoas por trás da Fixxe</p>
-              <h2 style={{ fontSize: "32px", fontWeight: 800, color: DARK, margin: 0 }}>A nossa equipa</h2>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
-              {EQUIPA.map(({ inicial, nome, cargo, bio }, i) => (
-                <div
-                  key={nome}
-                  className={`reveal reveal-delay-${i + 1}`}
-                  style={{ textAlign: "center", padding: "32px 24px", backgroundColor: CREAM, borderRadius: "16px", border: `1px solid ${BORDER}`, transition: "transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s ease" }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "scale(1.03) translateY(-4px)";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 48px rgba(0,0,0,0.10)";
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = "";
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = "";
-                  }}
-                >
-                  <div style={{ width: "88px", height: "88px", borderRadius: "50%", backgroundColor: DARK, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px", fontSize: "30px", fontWeight: 800, color: O }}>
-                    {inicial}
-                  </div>
-                  <h3 style={{ fontSize: "17px", fontWeight: 700, color: DARK, margin: "0 0 4px" }}>{nome}</h3>
-                  <p style={{ fontSize: "12px", fontWeight: 600, color: O, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 14px" }}>{cargo}</p>
-                  <p style={{ fontSize: "13px", color: MUTED, lineHeight: 1.65, margin: 0 }}>{bio}</p>
                 </div>
               ))}
             </div>
