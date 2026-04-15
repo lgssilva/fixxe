@@ -12,11 +12,14 @@ import { AuthModal } from "@/app/components/AuthModal";
 import { supabase } from "@/app/lib/supabase";
 
 const LINKS = [
-  { href: "/produtos",      label: "Loja"          },
-  { href: "/materiais",     label: "Materiais"      },
-  { href: "/personalizado", label: "Personalizado"  },
-  { href: "/sobre",         label: "Sobre Nós"      },
-  { href: "/blog",          label: "Blog"           },
+  { href: "/produtos",      label: "Loja",              b2b: false },
+  { href: "/materiais",     label: "Materiais",          b2b: false },
+  { href: "/impressoras",   label: "Impressoras",        b2b: false },
+  { href: "/farm",          label: "Farm",               b2b: false },
+  { href: "/personalizado", label: "Personalizado",      b2b: false },
+  { href: "/sobre",         label: "Sobre Nós",          b2b: false },
+  { href: "/blog",          label: "Blog",               b2b: false },
+  { href: "/b2b",           label: "B2B",                b2b: true  },
 ];
 
 /* Accept (and ignore) legacy cartCount prop so existing callers don't break */
@@ -87,8 +90,28 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
 
         {/* Links */}
         <div style={{ display: "flex", gap: "32px" }}>
-          {LINKS.map(({ href, label }) => {
+          {LINKS.map(({ href, label, b2b }) => {
             const active = pathname === href || pathname.startsWith(href + "/");
+            if (b2b) {
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className="nav-link"
+                  style={{
+                    color: active ? C.orange : C.orange,
+                    textDecoration: "none",
+                    fontSize: "14px",
+                    fontWeight: 700,
+                    borderBottom: active ? `2px solid ${C.orange}` : "2px solid transparent",
+                    paddingBottom: "2px",
+                    opacity: active ? 1 : 0.85,
+                  }}
+                >
+                  {label}
+                </Link>
+              );
+            }
             return (
               <Link
                 key={href}

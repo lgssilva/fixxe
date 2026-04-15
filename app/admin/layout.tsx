@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const C = {
   sidebar:   "#1f1b18",
   sidebarHover: "#2a2521",
-  orange:    "#ee924d",
+  orange:    "#ff6a00",
   cream:     "#f5f4f2",
   creamMuted:"#c9c7c4",
   content:   "#f5f4f2",

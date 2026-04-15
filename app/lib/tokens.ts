@@ -3,7 +3,7 @@ export const C = {
   bgCard:      "#2a2521",
   bgLight:     "#f5f4f2",
   bgWhite:     "#ffffff",
-  orange:      "#ee924d",
+  orange:      "#ff6a00",
   cream:       "#f5f4f2",
   creamMuted:  "#c9c7c4",
   dark:        "#1f1b18",

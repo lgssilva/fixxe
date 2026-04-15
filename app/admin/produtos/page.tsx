@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ALL_PRODUCTS, MAT_COLOR } from "@/app/lib/tokens";
 import type { Product } from "@/app/lib/tokens";
 
-const O = "#ee924d";
+const O = "#ff6a00";
 const DARK = "#1f1b18";
 const MUTED = "#6b6560";
 const BORDER = "#e8e5e1";

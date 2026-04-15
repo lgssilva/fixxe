@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
 
-const O = "#ee924d";
+const O = "#ff6a00";
 const DARK = "#1f1b18";
 const MUTED = "#6b6560";
 const CREAM = "#f5f4f2";

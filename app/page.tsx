@@ -10,7 +10,7 @@ const C = {
   bgCard:      "#2a2521",
   bgLight:     "#f5f4f2",
   bgWhite:     "#ffffff",
-  orange:      "#ee924d",
+  orange:      "#ff6a00",
   cream:       "#f5f4f2",
   creamMuted:  "#c9c7c4",
   dark:        "#1f1b18",
@@ -108,7 +108,7 @@ function HeroSlideshow() {
   return (
     <section style={{ backgroundColor: C.bg, position: "relative", overflow: "hidden" }}>
       {/* Grid overlay */}
-      <div style={{ position: "absolute", inset: 0, opacity: 0.025, backgroundImage: "linear-gradient(#ee924d 1px,transparent 1px),linear-gradient(90deg,#ee924d 1px,transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, opacity: 0.025, backgroundImage: "linear-gradient(#ff6a00 1px,transparent 1px),linear-gradient(90deg,#ff6a00 1px,transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none" }} />
 
       <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "88px 40px 60px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center", minHeight: "560px" }}>
 
@@ -196,7 +196,7 @@ function HeroSlideshow() {
 
 // ── Categories ────────────────────────────────────────────────────────────────
 const CATEGORIES = [
-  { name: "Decoração & Arte",  sub: "Vasos, esculturas, molduras",   accent: "#ee924d" },
+  { name: "Decoração & Arte",  sub: "Vasos, esculturas, molduras",   accent: "#ff6a00" },
   { name: "Organização",       sub: "Caixas, suportes, organizadores", accent: "#5ba3d9" },
   { name: "Ferramentas",       sub: "Peças técnicas, jigs, fixações",  accent: "#6dbe6d" },
   { name: "Personalizado",     sub: "Do teu ficheiro ao produto",      accent: "#b06dd9" },
@@ -633,7 +633,7 @@ const POSTS = [
     title: "5 ideias de presentes personalizados em impressão 3D",
     date:  "28 Março 2025",
     desc:  "Da decoração à tecnologia, descobre como a impressão 3D pode tornar os teus presentes verdadeiramente únicos.",
-    color: "#ee924d",
+    color: "#ff6a00",
   },
 ];
 
