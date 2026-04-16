@@ -230,3 +230,9 @@ body {
     grid-template-columns: 1fr !important;
   }
 }
+
+@media (max-width: 768px) {
+  .g-1-mob {
+    grid-template-columns: 1fr !important;
+  }
+}
