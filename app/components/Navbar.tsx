@@ -268,7 +268,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
         backgroundColor: "#fff",
         borderBottom: `1px solid ${C.borderLight}`,
         zIndex: 99,
-        transform: mobileOpen ? "translateY(0)" : "translateY(-110%)",
+        transform: mobileOpen ? "translateY(0)" : "translateY(-110%)", visibility: mobileOpen ? "visible" : "hidden",
         transition: "transform 0.3s cubic-bezier(0.22,1,0.36,1)",
         boxShadow: mobileOpen ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
         pointerEvents: mobileOpen ? "auto" : "none",
