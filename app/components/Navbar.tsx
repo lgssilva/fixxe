@@ -77,7 +77,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        height: "64px",
+        height: "74px",
         position: "sticky",
         top: 0,
         zIndex: 100,
@@ -85,7 +85,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
       }}>
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-          <Image src="/logo-fixxe.svg" alt="Fixxe" width={120} height={45} priority />
+          <Image src="/logo-fixxe.svg" alt="Fixxe" width={140} height={52} priority />
         </Link>
 
         {/* Links */}
@@ -101,7 +101,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
                   style={{
                     color: active ? C.orange : C.orange,
                     textDecoration: "none",
-                    fontSize: "14px",
+                    fontSize: "15px",
                     fontWeight: 700,
                     borderBottom: active ? `2px solid ${C.orange}` : "2px solid transparent",
                     paddingBottom: "2px",
@@ -120,7 +120,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
                 style={{
                   color: active ? C.dark : C.darkMuted,
                   textDecoration: "none",
-                  fontSize: "14px",
+                  fontSize: "15px",
                   fontWeight: active ? 700 : 500,
                   borderBottom: active ? `2px solid ${C.orange}` : "2px solid transparent",
                   paddingBottom: "2px",
@@ -218,7 +218,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
             <button
               onClick={() => setAuthOpen(true)}
               className="btn-primary"
-              style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "9px 20px", borderRadius: "8px", fontWeight: 600, fontSize: "14px", cursor: "pointer" }}
+              style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "9px 20px", borderRadius: "8px", fontWeight: 600, fontSize: "15px", cursor: "pointer" }}
             >
               Começar →
             </button>
