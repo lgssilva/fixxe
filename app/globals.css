@@ -224,3 +224,9 @@ body {
   .hide-mob { display: none !important; }
   .full-mob { width: 100% !important; }
 }
+
+@media (max-width: 768px) {
+  .why-fixxe-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
