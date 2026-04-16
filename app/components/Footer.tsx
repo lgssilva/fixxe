@@ -48,7 +48,11 @@ export function Footer() {
         </div>
 
         <div className="footer-btm-row" style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>© 2025 Fixxe — Cascais, Lisboa. Todos os direitos reservados.</p> <a href="https://nexoscreative.com" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", textDecoration: "none" }}>
+          <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>© 2026 Fixxe — Cascais, Lisboa. Todos os direitos reservados.</p> <a href="https://nexoscreative.com" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", textDecoration: "none" }}>
+  <span style={{ fontSize: "12px", color: "#6b6560" }}>Desenvolvido por</span>
+  <img src="/logo-nexos.svg" alt="Nexos Creative" height={20} style={{ opacity: 0.6 }} />
+</a>
+<a href="https://nexoscreative.com" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "6px", textDecoration: "none" }}>
   <span style={{ fontSize: "12px", color: "#6b6560" }}>Desenvolvido por</span>
   <img src="/logo-nexos.svg" alt="Nexos Creative" height={20} style={{ opacity: 0.6 }} />
 </a>
