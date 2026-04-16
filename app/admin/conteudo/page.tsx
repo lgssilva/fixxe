@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 
 const O = "#ff6a00";
 const DARK = "#1f1b18";
@@ -66,7 +66,22 @@ const INIT = {
   },
 };
 
-type TabKey = "homepage" | "paginas" | "config";
+type TabKey = "homepage" | "paginas" | "config" | "identidade";
+
+/* ── Identidade Visual helpers ──────────────────── */
+
+type AssetState = { preview: string | null; name: string; size: string; dragging: boolean };
+const ASSET_INIT: AssetState = { preview: null, name: "", size: "", dragging: false };
+
+function fmtSize(b: number) {
+  return b < 1024 * 1024 ? `${(b / 1024).toFixed(1)} KB` : `${(b / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function readAsset(file: File, set: React.Dispatch<React.SetStateAction<AssetState>>) {
+  const reader = new FileReader();
+  reader.onload = e => set(prev => ({ ...prev, preview: e.target?.result as string, name: file.name, size: fmtSize(file.size), dragging: false }));
+  reader.readAsDataURL(file);
+}
 
 /* ── Toast ─────────────────────────────────────── */
 
@@ -137,6 +152,15 @@ export default function AdminConteudo() {
   const [data, setData]     = useState(INIT);
   const [toast, setToast]   = useState({ visible: false, msg: "" });
 
+  /* Identidade visual state */
+  const [logo,    setLogo]    = useState<AssetState>(ASSET_INIT);
+  const [favicon, setFavicon] = useState<AssetState>(ASSET_INIT);
+  const [ogImage, setOgImage] = useState<AssetState>(ASSET_INIT);
+
+  const logoRef    = useRef<HTMLInputElement>(null);
+  const faviconRef = useRef<HTMLInputElement>(null);
+  const ogRef      = useRef<HTMLInputElement>(null);
+
   const showToast = useCallback((msg = "Alterações guardadas com sucesso!") => {
     setToast({ visible: true, msg });
     setTimeout(() => setToast(t => ({ ...t, visible: false })), 3000);
@@ -168,9 +192,10 @@ export default function AdminConteudo() {
     setData(d => ({ ...d, config: { ...d.config, [k]: v } }));
 
   const TABS: { key: TabKey; label: string }[] = [
-    { key: "homepage", label: "Homepage"               },
-    { key: "paginas",  label: "Páginas"                },
-    { key: "config",   label: "Configurações Gerais"   },
+    { key: "homepage",   label: "Homepage"               },
+    { key: "paginas",    label: "Páginas"                },
+    { key: "config",     label: "Configurações Gerais"   },
+    { key: "identidade", label: "Identidade Visual"      },
   ];
 
   return (
@@ -367,6 +392,174 @@ export default function AdminConteudo() {
           </SectionCard>
         </div>
       )}
+
+      {/* ── TAB: Identidade Visual ── */}
+      {tab === "identidade" && (() => {
+        const mkDrop = (
+          set: React.Dispatch<React.SetStateAction<AssetState>>,
+        ) => ({
+          onDragOver:  (e: React.DragEvent) => { e.preventDefault(); set(s => ({ ...s, dragging: true })); },
+          onDragLeave: ()                   => { set(s => ({ ...s, dragging: false })); },
+          onDrop:      (e: React.DragEvent) => {
+            e.preventDefault();
+            const f = e.dataTransfer.files[0];
+            if (f) readAsset(f, set);
+          },
+        });
+
+        const UploadZone = ({
+          asset, set, accept, inputRef, btnLabel, previewShape,
+        }: {
+          asset: AssetState;
+          set: React.Dispatch<React.SetStateAction<AssetState>>;
+          accept: string;
+          inputRef: React.RefObject<HTMLInputElement>;
+          btnLabel: string;
+          previewShape: "logo" | "favicon" | "og";
+        }) => {
+          const drop = mkDrop(set);
+          const dims: Record<string, React.CSSProperties> = {
+            logo:    { width: "160px", height: "60px",  borderRadius: "8px" },
+            favicon: { width: "48px",  height: "48px",  borderRadius: "6px" },
+            og:      { width: "191px", height: "100px", borderRadius: "6px" },
+          };
+          return (
+            <div style={{ display: "flex", gap: "20px", alignItems: "flex-start", flexWrap: "wrap" }}>
+              {/* Drop zone */}
+              <div
+                {...drop}
+                onClick={() => inputRef.current?.click()}
+                style={{
+                  flex: 1, minWidth: "260px",
+                  border: `2px dashed ${asset.dragging ? O : BORDER}`,
+                  borderRadius: "10px",
+                  padding: "24px 20px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  backgroundColor: asset.dragging ? "rgba(255,106,0,0.04)" : "#fafaf9",
+                  transition: "all 0.15s",
+                }}
+              >
+                <div style={{ fontSize: "28px", marginBottom: "8px" }}>📁</div>
+                <p style={{ fontSize: "13px", color: MUTED, margin: "0 0 12px", lineHeight: 1.5 }}>
+                  Arrasta o ficheiro para aqui ou clica para selecionar
+                </p>
+                <button
+                  type="button"
+                  onClick={e => { e.stopPropagation(); inputRef.current?.click(); }}
+                  style={{ backgroundColor: O, color: "#fff", border: "none", padding: "8px 18px", borderRadius: "7px", fontSize: "12px", fontWeight: 700, cursor: "pointer" }}
+                >
+                  {btnLabel}
+                </button>
+                <input
+                  ref={inputRef}
+                  type="file"
+                  accept={accept}
+                  style={{ display: "none" }}
+                  onChange={e => { const f = e.target.files?.[0]; if (f) readAsset(f, set); }}
+                />
+                {asset.name && (
+                  <p style={{ fontSize: "11px", color: MUTED, margin: "10px 0 0" }}>
+                    {asset.name} · {asset.size}
+                  </p>
+                )}
+              </div>
+
+              {/* Preview */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "6px" }}>
+                <p style={{ fontSize: "11px", color: MUTED, margin: 0, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>Preview</p>
+                <div style={{
+                  ...dims[previewShape],
+                  backgroundColor: "#e8e5e1",
+                  border: `1px solid ${BORDER}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  overflow: "hidden",
+                }}>
+                  {asset.preview
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    ? <img src={asset.preview} alt="preview" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+                    : <span style={{ fontSize: "11px", color: "#b0aba5" }}>sem imagem</span>
+                  }
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        return (
+          <div>
+            {/* Nota informativa */}
+            <div style={{ backgroundColor: "rgba(255,106,0,0.07)", border: `1px solid rgba(255,106,0,0.25)`, borderRadius: "10px", padding: "12px 16px", marginBottom: "20px", display: "flex", gap: "10px", alignItems: "flex-start" }}>
+              <span style={{ fontSize: "16px" }}>ℹ️</span>
+              <p style={{ fontSize: "12px", color: DARK, margin: 0, lineHeight: 1.6 }}>
+                <strong>Os ficheiros são guardados localmente.</strong> Para aplicar as alterações no site é necessário fazer deploy após guardar.
+              </p>
+            </div>
+
+            {/* Logo */}
+            <SectionCard title="Logo do Site">
+              <Field
+                label="Logo principal (SVG)"
+                hint="Usada na navbar e no footer. Formato recomendado: SVG. Tamanho máximo: 1 MB"
+              >
+                <UploadZone
+                  asset={logo} set={setLogo}
+                  accept=".svg,.png"
+                  inputRef={logoRef}
+                  btnLabel="Carregar nova logo"
+                  previewShape="logo"
+                />
+              </Field>
+              <p style={{ fontSize: "11px", color: MUTED, marginTop: "10px", fontStyle: "italic" }}>
+                Após carregar, faz deploy para aplicar as alterações.
+              </p>
+            </SectionCard>
+
+            {/* Favicon */}
+            <SectionCard title="Favicon">
+              <Field
+                label="Favicon"
+                hint="Ícone que aparece no separador do browser. Formato recomendado: .ico ou .png 32×32 px"
+              >
+                <UploadZone
+                  asset={favicon} set={setFavicon}
+                  accept=".ico,.png"
+                  inputRef={faviconRef}
+                  btnLabel="Carregar favicon"
+                  previewShape="favicon"
+                />
+              </Field>
+            </SectionCard>
+
+            {/* OG Image */}
+            <SectionCard title="Imagem de Partilha (OG Image)">
+              <Field
+                label="Imagem de partilha (OG Image)"
+                hint="Imagem que aparece quando o site é partilhado nas redes sociais. Tamanho recomendado: 1200×630 px. Formato: JPG ou PNG"
+              >
+                <UploadZone
+                  asset={ogImage} set={setOgImage}
+                  accept=".jpg,.jpeg,.png"
+                  inputRef={ogRef}
+                  btnLabel="Carregar OG Image"
+                  previewShape="og"
+                />
+              </Field>
+            </SectionCard>
+
+            {/* Guardar */}
+            <div style={{ backgroundColor: "#fff", borderRadius: "12px", border: `1px solid ${BORDER}`, padding: "20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <p style={{ fontSize: "12px", color: MUTED, margin: 0 }}>Guarda todas as alterações de identidade visual.</p>
+              <button
+                onClick={() => showToast("Alterações guardadas! Faz deploy para aplicar.")}
+                style={{ backgroundColor: O, color: "#fff", border: "none", padding: "10px 22px", borderRadius: "8px", fontSize: "13px", fontWeight: 700, cursor: "pointer" }}
+              >
+                Guardar alterações
+              </button>
+            </div>
+          </div>
+        );
+      })()}
 
       <Toast msg={toast.msg} visible={toast.visible} />
     </div>
