@@ -570,7 +570,7 @@ function WhyFixxeSection() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "28px" }}>
           {PILLARS.map((p, i) => <PillarCard key={i} p={p} delay={i * 100} />)}
         </div>
 
