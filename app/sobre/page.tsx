@@ -165,11 +165,10 @@ export default function SobrePage() {
               <h2 style={{ fontSize: "32px", fontWeight: 800, color: DARK, margin: 0 }}>Os nossos valores</h2>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }}>
-              {VALORES.map(({ Icon, title, desc }, i) => (
+              {VALORES.map(({ Icon, title, desc }) => (
                 <div
                   key={title}
-                  className={`reveal reveal-delay-${i + 1}`}
-                  style={{ backgroundColor: "#fff", borderRadius: "16px", padding: "32px", border: `1px solid ${BORDER}`, transition: "border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease", cursor: "default" }}
+                  style={{ backgroundColor: "#fff", borderRadius: "16px", padding: "32px", border: `1px solid ${BORDER}`, transition: "border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease", cursor: "default", opacity: 1 }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLDivElement).style.borderColor = `rgba(238,146,77,0.6)`;
                     (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";

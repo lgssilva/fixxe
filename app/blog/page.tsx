@@ -115,14 +115,13 @@ export default function BlogPage() {
             {filtered.map((art, i) => (
               <article
                 key={i}
-                className="blog-card reveal"
+                className="blog-card"
                 style={{
                   backgroundColor: "#fff",
                   borderRadius: "14px",
                   border: `1px solid ${BORDER}`,
                   overflow: "hidden",
-                  animationDelay: `${i * 0.08}s`,
-                  transitionDelay: `${i * 0.08}s`,
+                  opacity: 1,
                 }}
               >
                 {/* Imagem placeholder com shimmer */}
@@ -176,7 +175,7 @@ export default function BlogPage() {
           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
           animation: shimmer 1.6s infinite;
         }
-        .blog-card.visible { opacity: 1; transform: translateY(0); }
+        .blog-card { opacity: 1; }
       `}</style>
 
       <Footer />

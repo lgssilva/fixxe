@@ -157,7 +157,7 @@ export default function B2BPage() {
                 Trabalhamos com empresas de todos os setores que precisam de produção 3D de qualidade.
               </p>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "20px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
               {[
                 { icon: "🚀", setor: "Startups & Scale-ups", desc: "Prototipagem ágil para iterar rápido e validar produto antes de produção em massa." },
                 { icon: "🏛️", setor: "Arquitetura & Design", desc: "Maquetes, modelos arquitetónicos e peças de design para apresentações impactantes." },
@@ -168,7 +168,7 @@ export default function B2BPage() {
               ].map((item, i) => (
                 <RevealCard key={item.setor} delay={i * 0.07}>
                   <div
-                    style={{ backgroundColor: CREAM, borderRadius: "12px", border: `1px solid ${BORDER_LIGHT}`, padding: "28px 24px", transition: "all 0.25s" }}
+                    style={{ backgroundColor: CREAM, borderRadius: "12px", border: `1px solid ${BORDER_LIGHT}`, padding: "32px 24px", minHeight: "160px", transition: "all 0.25s" }}
                     onMouseEnter={e => {
                       (e.currentTarget as HTMLDivElement).style.borderColor = O_RGBA(0.4);
                       (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)";

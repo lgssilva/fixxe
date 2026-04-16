@@ -12,14 +12,14 @@ import { AuthModal } from "@/app/components/AuthModal";
 import { supabase } from "@/app/lib/supabase";
 
 const LINKS = [
-  { href: "/produtos",      label: "Loja",              b2b: false },
-  { href: "/materiais",     label: "Materiais",          b2b: false },
-  { href: "/impressoras",   label: "Impressoras",        b2b: false },
-  { href: "/farm",          label: "Farm",               b2b: false },
-  { href: "/personalizado", label: "Personalizado",      b2b: false },
-  { href: "/sobre",         label: "Sobre Nós",          b2b: false },
-  { href: "/blog",          label: "Blog",               b2b: false },
-  { href: "/b2b",           label: "B2B",                b2b: true  },
+  { href: "/produtos",      label: "Loja",          b2b: false },
+  { href: "/b2b",           label: "B2B",           b2b: true  },
+  { href: "/materiais",     label: "Materiais",     b2b: false },
+  { href: "/impressoras",   label: "Impressoras",   b2b: false },
+  { href: "/farm",          label: "Farm",          b2b: false },
+  { href: "/personalizado", label: "Personalizado", b2b: false },
+  { href: "/sobre",         label: "Sobre Nós",     b2b: false },
+  { href: "/blog",          label: "Blog",          b2b: false },
 ];
 
 /* Accept (and ignore) legacy cartCount prop so existing callers don't break */
