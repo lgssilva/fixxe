@@ -85,7 +85,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
       }}>
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-          <Image src="/logo-fixxe.svg" alt="Fixxe" width={86} height={32} priority />
+          <Image src="/logo-fixxe.svg" alt="Fixxe" width={120} height={45} priority />
         </Link>
 
         {/* Links */}
