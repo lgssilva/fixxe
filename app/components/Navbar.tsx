@@ -91,7 +91,7 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
         {/* Links */}
         <div style={{ display: "flex", gap: "32px" }}>
           {LINKS.map(({ href, label, b2b }) => {
-            const active = pathname === href || pathname.startsWith(href + "/");
+            const active = pathname === href;
             if (b2b) {
               return (
                 <Link
