@@ -95,7 +95,7 @@ export default function CheckoutPage() {
         </div>
 
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 40px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "60% 40%", gap: "40px", alignItems: "start" }}>
+          <div className="checkout-grid" style={{ display: "grid", gridTemplateColumns: "60% 40%", gap: "40px", alignItems: "start" }}>
             {/* Formulário */}
             <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
               {/* Secção 1 — Dados de contacto */}

@@ -102,7 +102,7 @@ export default function B2BPage() {
         {/* ── Hero ── */}
         <section style={{ backgroundColor: DARK, padding: "100px 40px 80px", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", inset: 0, opacity: 0.03, backgroundImage: `linear-gradient(${O} 1px,transparent 1px),linear-gradient(90deg,${O} 1px,transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none" }} />
-          <div style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
+          <div className="b2b-hero-cols" style={{ position: "relative", maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center" }}>
             <div>
               <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: O_RGBA(0.15), border: `1px solid ${O_RGBA(0.35)}`, borderRadius: "20px", padding: "6px 16px", marginBottom: "24px" }}>
                 <span style={{ fontSize: "12px", color: O, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Soluções Empresariais</span>
@@ -131,7 +131,7 @@ export default function B2BPage() {
                 </Link>
               </div>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+            <div className="b2b-hero-cards" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
               {[
                 { valor: "4h", label: "Resposta garantida", icone: "⚡" },
                 { valor: "NDA", label: "Confidencialidade total", icone: "🔒" },

@@ -20,6 +20,7 @@ export default function ProdutosPage() {
   const [sort, setSort] = useState("relevancia");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   const toggle = <T,>(arr: T[], val: T) =>
     arr.includes(val) ? arr.filter((x) => x !== val) : [...arr, val];
@@ -72,69 +73,80 @@ export default function ProdutosPage() {
           </div>
         </div>
 
-        <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "32px 40px", display: "flex", gap: "32px", alignItems: "flex-start" }}>
+        <div className="prods-wrap" style={{ maxWidth: "1200px", margin: "0 auto", padding: "32px 40px", display: "flex", gap: "32px", alignItems: "flex-start" }}>
           {/* Sidebar */}
-          <aside style={{ width: "240px", flexShrink: 0, backgroundColor: "#fff", borderRadius: "12px", border: `1px solid ${C.borderLight}`, padding: "24px", position: "sticky", top: "88px" }}>
-            <h2 style={{ fontSize: "16px", fontWeight: 700, color: C.dark, margin: "0 0 20px" }}>Filtrar</h2>
-
-            {/* Categorias */}
-            <div style={{ marginBottom: "24px" }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Categoria</h3>
-              {CATS.map((cat) => (
-                <label key={cat} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", cursor: "pointer", fontSize: "14px", color: C.dark }}>
-                  <input
-                    type="checkbox"
-                    checked={cats.includes(cat)}
-                    onChange={() => setCats(toggle(cats, cat))}
-                    style={{ accentColor: C.orange, width: "16px", height: "16px", cursor: "pointer" }}
-                  />
-                  {cat}
-                </label>
-              ))}
+          <aside className="prods-sidebar" style={{ width: "240px", flexShrink: 0, backgroundColor: "#fff", borderRadius: "12px", border: `1px solid ${C.borderLight}`, padding: "24px", position: "sticky", top: "88px" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+              <h2 style={{ fontSize: "16px", fontWeight: 700, color: C.dark, margin: 0 }}>Filtrar</h2>
+              <button
+                className="filter-mob-btn"
+                onClick={() => setFiltersOpen(o => !o)}
+                style={{ background: "none", border: `1px solid ${C.borderLight}`, borderRadius: "6px", padding: "4px 10px", fontSize: "12px", color: C.darkMuted, cursor: "pointer" }}
+              >
+                {filtersOpen ? "Fechar ▲" : "Abrir ▼"}
+              </button>
             </div>
 
-            {/* Materiais */}
-            <div style={{ marginBottom: "24px" }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Material</h3>
-              {MATS.map((mat) => (
-                <label key={mat} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", cursor: "pointer", fontSize: "14px", color: C.dark }}>
-                  <input
-                    type="checkbox"
-                    checked={mats.includes(mat)}
-                    onChange={() => setMats(toggle(mats, mat))}
-                    style={{ accentColor: C.orange, width: "16px", height: "16px", cursor: "pointer" }}
-                  />
-                  <span style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: MAT_COLOR[mat], flexShrink: 0 }} />
-                  {mat}
-                </label>
-              ))}
-            </div>
-
-            {/* Preço */}
-            <div style={{ marginBottom: "28px" }}>
-              <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Preço máximo</h3>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: C.darkMuted, marginBottom: "8px" }}>
-                <span>0 €</span>
-                <span style={{ color: C.orange, fontWeight: 600 }}>{priceMax} €</span>
+            <div className={`sidebar-collapsible${filtersOpen ? " open" : ""}`}>
+              {/* Categorias */}
+              <div style={{ marginBottom: "24px" }}>
+                <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Categoria</h3>
+                {CATS.map((cat) => (
+                  <label key={cat} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", cursor: "pointer", fontSize: "14px", color: C.dark }}>
+                    <input
+                      type="checkbox"
+                      checked={cats.includes(cat)}
+                      onChange={() => setCats(toggle(cats, cat))}
+                      style={{ accentColor: C.orange, width: "16px", height: "16px", cursor: "pointer" }}
+                    />
+                    {cat}
+                  </label>
+                ))}
               </div>
-              <input
-                type="range"
-                min={0}
-                max={500}
-                step={5}
-                value={priceMax}
-                onChange={(e) => setPriceMax(Number(e.target.value))}
-                style={{ width: "100%", accentColor: C.orange, cursor: "pointer" }}
-              />
-            </div>
 
-            <button
-              onClick={() => { setCats([]); setMats([]); setPriceMax(500); }}
-              style={{ width: "100%", backgroundColor: C.orange, color: "#fff", border: "none", padding: "11px", borderRadius: "8px", fontWeight: 600, fontSize: "14px", cursor: "pointer" }}
-              className="btn-primary"
-            >
-              Filtrar
-            </button>
+              {/* Materiais */}
+              <div style={{ marginBottom: "24px" }}>
+                <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Material</h3>
+                {MATS.map((mat) => (
+                  <label key={mat} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px", cursor: "pointer", fontSize: "14px", color: C.dark }}>
+                    <input
+                      type="checkbox"
+                      checked={mats.includes(mat)}
+                      onChange={() => setMats(toggle(mats, mat))}
+                      style={{ accentColor: C.orange, width: "16px", height: "16px", cursor: "pointer" }}
+                    />
+                    <span style={{ width: "10px", height: "10px", borderRadius: "50%", backgroundColor: MAT_COLOR[mat], flexShrink: 0 }} />
+                    {mat}
+                  </label>
+                ))}
+              </div>
+
+              {/* Preço */}
+              <div style={{ marginBottom: "28px" }}>
+                <h3 style={{ fontSize: "12px", fontWeight: 700, color: C.darkMuted, textTransform: "uppercase", letterSpacing: "0.07em", margin: "0 0 12px" }}>Preço máximo</h3>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: C.darkMuted, marginBottom: "8px" }}>
+                  <span>0 €</span>
+                  <span style={{ color: C.orange, fontWeight: 600 }}>{priceMax} €</span>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={500}
+                  step={5}
+                  value={priceMax}
+                  onChange={(e) => setPriceMax(Number(e.target.value))}
+                  style={{ width: "100%", accentColor: C.orange, cursor: "pointer" }}
+                />
+              </div>
+
+              <button
+                onClick={() => { setCats([]); setMats([]); setPriceMax(500); }}
+                style={{ width: "100%", backgroundColor: C.orange, color: "#fff", border: "none", padding: "11px", borderRadius: "8px", fontWeight: 600, fontSize: "14px", cursor: "pointer" }}
+                className="btn-primary"
+              >
+                Filtrar
+              </button>
+            </div>
           </aside>
 
           {/* Main */}

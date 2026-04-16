@@ -70,7 +70,7 @@ export default function CarrinhoPage() {
               </Link>
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "65% 35%", gap: "32px", alignItems: "start" }}>
+            <div className="cart-grid" style={{ display: "grid", gridTemplateColumns: "65% 35%", gap: "32px", alignItems: "start" }}>
               {/* Lista de itens */}
               <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {items.map((item) => (

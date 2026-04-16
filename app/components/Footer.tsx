@@ -14,9 +14,9 @@ export function Footer() {
   return (
     <footer style={{ backgroundColor: C.dark, borderTop: `1px solid ${C.border}`, padding: "60px 40px 32px" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "48px" }}>
+        <div className="footer-cols" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "48px" }}>
           {/* Brand */}
-          <div>
+          <div className="footer-brand-col">
             <div style={{ marginBottom: "16px" }}>
               <Link href="/" style={{ textDecoration: "none", display: "inline-block" }}>
                 <Image src="/logo-fixxe.svg" alt="Fixxe" width={75} height={28} style={{ filter: "brightness(0) invert(1)" }} />
@@ -47,7 +47,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div className="footer-btm-row" style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>© 2025 Fixxe — Cascais, Lisboa. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: "20px" }}>
             {["Instagram", "TikTok", "LinkedIn"].map(s => (

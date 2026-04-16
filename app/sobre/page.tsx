@@ -135,7 +135,7 @@ export default function SobrePage() {
 
         {/* Missão */}
         <section style={{ padding: "72px 40px", backgroundColor: "#fff" }}>
-          <div ref={missaoRef} className="reveal" style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
+          <div ref={missaoRef} className="reveal sobre-miss" style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }}>
             <div>
               <p style={{ fontSize: "12px", fontWeight: 700, color: O, textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 12px" }}>A nossa missão</p>
               <h2 style={{ fontSize: "32px", fontWeight: 800, color: DARK, margin: "0 0 20px", lineHeight: 1.25 }}>
@@ -193,7 +193,7 @@ export default function SobrePage() {
 
         {/* Números */}
         <section style={{ padding: "72px 40px", backgroundColor: DARK }}>
-          <div style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px", textAlign: "center" }}>
+          <div className="sobre-nums" style={{ maxWidth: "900px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px", textAlign: "center" }}>
             {NUMEROS.map(({ target, suffix, label }) => (
               <div key={label}>
                 <p style={{ fontSize: "44px", fontWeight: 900, color: O, margin: "0 0 6px", lineHeight: 1 }}>

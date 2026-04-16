@@ -32,7 +32,17 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
   const [authOpen, setAuthOpen]     = useState(false);
   const [user, setUser]             = useState<User | null>(null);
   const [dropOpen, setDropOpen]     = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
+
+  /* Close mobile menu on route change */
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
+
+  /* Lock body scroll when mobile menu open */
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   /* Supabase auth state */
   useEffect(() => {
@@ -88,8 +98,8 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
           <Image src="/logo-fixxe.svg" alt="Fixxe" width={140} height={52} priority />
         </Link>
 
-        {/* Links */}
-        <div style={{ display: "flex", gap: "32px" }}>
+        {/* Links — desktop */}
+        <div className="nav-links" style={{ display: "flex", gap: "32px" }}>
           {LINKS.map(({ href, label, b2b }) => {
             const active = pathname === href;
             if (b2b) {
@@ -213,18 +223,87 @@ export function Navbar({ cartCount: _legacy }: { cartCount?: number } = {}) {
             )}
           </button>
 
-          {/* Começar (só quando não autenticado) */}
+          {/* Começar (só quando não autenticado) — esconde em mobile */}
           {!user && (
             <button
               onClick={() => setAuthOpen(true)}
-              className="btn-primary"
+              className="btn-primary nav-start-btn"
               style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "9px 20px", borderRadius: "8px", fontWeight: 600, fontSize: "15px", cursor: "pointer" }}
             >
               Começar →
             </button>
           )}
+
+          {/* Hamburguer — só em mobile */}
+          <button
+            className="nav-hamburger"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
+            style={{ color: C.dark }}
+          >
+            {mobileOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+              </svg>
+            )}
+          </button>
         </div>
       </nav>
+
+      {/* ── Mobile overlay ── */}
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.45)", zIndex: 98, backdropFilter: "blur(2px)" }}
+        />
+      )}
+
+      {/* ── Mobile drawer ── */}
+      <div style={{
+        position: "fixed", top: "74px", left: 0, right: 0,
+        backgroundColor: "#fff",
+        borderBottom: `1px solid ${C.borderLight}`,
+        zIndex: 99,
+        transform: mobileOpen ? "translateY(0)" : "translateY(-110%)",
+        transition: "transform 0.3s cubic-bezier(0.22,1,0.36,1)",
+        boxShadow: mobileOpen ? "0 8px 32px rgba(0,0,0,0.12)" : "none",
+        pointerEvents: mobileOpen ? "auto" : "none",
+      }}>
+        <div style={{ padding: "8px 0 8px" }}>
+          {LINKS.map(({ href, label, b2b }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              style={{
+                display: "block",
+                padding: "15px 24px",
+                fontSize: "18px",
+                fontWeight: b2b ? 700 : 500,
+                color: b2b ? C.orange : C.dark,
+                textDecoration: "none",
+                borderBottom: `1px solid ${C.borderLight}`,
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+          {!user && (
+            <div style={{ padding: "16px 24px" }}>
+              <button
+                onClick={() => { setAuthOpen(true); setMobileOpen(false); }}
+                style={{ width: "100%", backgroundColor: C.orange, color: "#fff", border: "none", padding: "14px", borderRadius: "10px", fontWeight: 700, fontSize: "16px", cursor: "pointer" }}
+              >
+                Começar →
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Drawers — fixed position, não afetados pelo DOM position */}
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />

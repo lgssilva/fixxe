@@ -110,7 +110,7 @@ function HeroSlideshow() {
       {/* Grid overlay */}
       <div style={{ position: "absolute", inset: 0, opacity: 0.025, backgroundImage: "linear-gradient(#ff6a00 1px,transparent 1px),linear-gradient(90deg,#ff6a00 1px,transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none" }} />
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "88px 40px 60px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center", minHeight: "560px" }}>
+      <div className="hero-grid" style={{ maxWidth: "1200px", margin: "0 auto", padding: "88px 40px 60px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "center", minHeight: "560px" }}>
 
         {/* Left */}
         <div key={animKey}>
@@ -126,7 +126,7 @@ function HeroSlideshow() {
             {s.subtitle}
           </p>
 
-          <div className="animate-slide-up-delay2" style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+          <div className="animate-slide-up-delay2 hero-btns" style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
             <button className="btn-primary" style={{ backgroundColor: C.orange, color: "#fff", border: "none", padding: "13px 26px", borderRadius: "10px", fontWeight: 700, fontSize: "15px", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}>
               {s.cta}
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -137,7 +137,7 @@ function HeroSlideshow() {
           </div>
 
           {/* Stats */}
-          <div style={{ display: "flex", gap: "32px", marginTop: "44px", paddingTop: "32px", borderTop: `1px solid ${C.border}` }}>
+          <div className="hero-stats" style={{ display: "flex", gap: "32px", marginTop: "44px", paddingTop: "32px", borderTop: `1px solid ${C.border}` }}>
             {[{ v: "3.200+", l: "Peças entregues" }, { v: "98%", l: "Satisfação" }, { v: "3–5 dias", l: "Entrega" }].map(s => (
               <div key={s.l}>
                 <div style={{ fontSize: "22px", fontWeight: 800, color: C.orange }}>{s.v}</div>
@@ -148,7 +148,7 @@ function HeroSlideshow() {
         </div>
 
         {/* Right — placeholder */}
-        <div key={`img-${animKey}`} className="animate-fade-in" style={{ position: "relative" }}>
+        <div key={`img-${animKey}`} className="animate-fade-in hero-img-col" style={{ position: "relative" }}>
           <div style={{ backgroundColor: "#2a2521", borderRadius: "20px", aspectRatio: "4/5", display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${C.border}`, overflow: "hidden", position: "relative" }}>
             <div style={{ position: "absolute", top: "20px", right: "20px", width: "80px", height: "80px", borderRadius: "50%", backgroundColor: `${C.orange}12`, border: `1px solid ${C.orange}25` }} />
             <div style={{ position: "absolute", bottom: "50px", left: "24px", width: "44px", height: "44px", borderRadius: "50%", backgroundColor: `${C.orange}08` }} />
@@ -241,7 +241,7 @@ function CategoriesSection() {
   return (
     <section style={{ padding: "80px 40px", backgroundColor: C.bgLight }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div ref={headRef} className="reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
+        <div ref={headRef} className="reveal sec-head-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
           <div>
             <p style={{ fontSize: "11px", color: C.orange, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 8px" }}>Categorias</p>
             <h2 style={{ fontSize: "36px", fontWeight: 800, color: C.dark, margin: 0, letterSpacing: "-0.02em" }}>O que queres criar?</h2>
@@ -250,7 +250,7 @@ function CategoriesSection() {
             Ver todas as categorias <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
           {CATEGORIES.map((cat, i) => <CategoryCard key={cat.name} cat={cat} delay={i * 80} />)}
         </div>
       </div>
@@ -306,7 +306,7 @@ function ProductsSection() {
   return (
     <section style={{ padding: "80px 40px", backgroundColor: C.bgWhite }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div ref={headRef} className="reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
+        <div ref={headRef} className="reveal sec-head-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
           <div>
             <p style={{ fontSize: "11px", color: C.orange, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 8px" }}>Destaques</p>
             <h2 style={{ fontSize: "36px", fontWeight: 800, color: C.dark, margin: 0, letterSpacing: "-0.02em" }}>Os nossos favoritos</h2>
@@ -315,7 +315,7 @@ function ProductsSection() {
             Ver catálogo completo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
+        <div className="g-2-mob" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
           {PRODUCTS.map((p, i) => <ProductCard key={p.name} p={p} delay={i * 80} />)}
         </div>
       </div>
@@ -370,7 +370,7 @@ function MaterialsSection() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }}>
           {MATERIALS.map((m, i) => <MaterialCard key={m.name} m={m} delay={i * 80} />)}
         </div>
       </div>
@@ -411,7 +411,7 @@ function CTABanner() {
   return (
     <section style={{ padding: "0 40px 0", backgroundColor: C.bgLight }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div ref={ref} className="reveal" style={{ backgroundColor: C.orange, borderRadius: "20px", padding: "64px 56px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "40px", position: "relative", overflow: "hidden" }}>
+        <div ref={ref} className="reveal cta-flex" style={{ backgroundColor: C.orange, borderRadius: "20px", padding: "64px 56px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "40px", position: "relative", overflow: "hidden" }}>
           {/* Decorative circles */}
           <div style={{ position: "absolute", right: "-60px", top: "-60px", width: "240px", height: "240px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.08)" }} />
           <div style={{ position: "absolute", right: "80px", bottom: "-80px", width: "180px", height: "180px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.06)" }} />
@@ -475,7 +475,7 @@ function TestimonialsSection() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
           {TESTIMONIALS.map((t, i) => <TestimonialCard key={t.name} t={t} delay={i * 100} />)}
         </div>
       </div>
@@ -575,7 +575,7 @@ function WhyFixxeSection() {
         </div>
 
         {/* Inner CTA */}
-        <div ref={ctaRef} className="reveal" style={{ marginTop: "52px", backgroundColor: C.dark, borderRadius: "20px", padding: "44px 52px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", position: "relative", overflow: "hidden" }}>
+        <div ref={ctaRef} className="reveal inner-cta" style={{ marginTop: "52px", backgroundColor: C.dark, borderRadius: "20px", padding: "44px 52px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", position: "relative", overflow: "hidden" }}>
           <div style={{ position: "absolute", left: "-60px", top: "50%", transform: "translateY(-50%)", width: "200px", height: "200px", borderRadius: "50%", backgroundColor: `${C.orange}07`, pointerEvents: "none" }} />
           <div style={{ position: "relative" }}>
             <h3 style={{ fontSize: "24px", fontWeight: 800, color: C.cream, margin: "0 0 8px", letterSpacing: "-0.02em" }}>
@@ -642,7 +642,7 @@ function BlogSection() {
   return (
     <section style={{ padding: "88px 40px", backgroundColor: C.bgWhite }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div ref={headRef} className="reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "44px" }}>
+        <div ref={headRef} className="reveal sec-head-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "44px" }}>
           <div>
             <p style={{ fontSize: "11px", color: C.orange, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", margin: "0 0 8px" }}>Blog & Novidades</p>
             <h2 style={{ fontSize: "36px", fontWeight: 800, color: C.dark, margin: 0, letterSpacing: "-0.02em" }}>Do nosso estúdio para ti</h2>
@@ -652,7 +652,7 @@ function BlogSection() {
           </a>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }}>
           {POSTS.map((post, i) => <BlogCard key={post.title} post={post} delay={i * 90} />)}
         </div>
       </div>
@@ -697,9 +697,9 @@ function Footer() {
   return (
     <footer style={{ backgroundColor: C.dark, borderTop: `1px solid ${C.border}`, padding: "60px 40px 32px" }}>
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "48px" }}>
+        <div className="footer-cols" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "48px" }}>
           {/* Brand */}
-          <div>
+          <div className="footer-brand-col">
             <div style={{ marginBottom: "16px" }}>
               <a href="/" style={{ textDecoration: "none", display: "inline-block" }}>
                 <Image src="/logo-fixxe.svg" alt="Fixxe" width={75} height={28} style={{ filter: "brightness(0) invert(1)" }} />
@@ -734,7 +734,7 @@ function Footer() {
           ))}
         </div>
 
-        <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div className="footer-btm-row" style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>© 2025 Fixxe — Cascais, Lisboa. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: "20px" }}>
             {["Instagram", "TikTok", "LinkedIn"].map(s => (

@@ -142,3 +142,79 @@ body {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+
+/* ══════════════════════════════════════════════════
+   MOBILE RESPONSIVE  (max-width: 768px)
+   ══════════════════════════════════════════════════ */
+
+/* Hamburger & filter toggle: hidden on desktop */
+.nav-hamburger  { display: none !important; }
+.filter-mob-btn { display: none !important; }
+
+@media (max-width: 768px) {
+  /* ── Navbar ── */
+  .nav-links      { display: none !important; }
+  .nav-start-btn  { display: none !important; }
+  .nav-hamburger  { display: flex !important; background: none; border: none; cursor: pointer;
+                    padding: 6px; color: #1f1b18; align-items: center; justify-content: center; }
+
+  /* ── Section padding ── */
+  .sec-pad  { padding-left: 20px !important; padding-right: 20px !important; }
+  .sec-py   { padding-top: 48px !important; padding-bottom: 48px !important; }
+
+  /* ── Section header row (flex space-between) ── */
+  .sec-head-row { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+
+  /* ── Hero ── */
+  .hero-grid    { grid-template-columns: 1fr !important;
+                  padding-top: 48px !important; padding-left: 20px !important; padding-right: 20px !important;
+                  padding-bottom: 32px !important; min-height: auto !important; gap: 28px !important; }
+  .hero-img-col { display: none !important; }
+  .hero-btns    { flex-direction: column !important; }
+  .hero-btns > * { width: 100% !important; text-align: center !important; box-sizing: border-box; }
+  .hero-stats   { display: grid !important; grid-template-columns: repeat(3, 1fr) !important;
+                  gap: 8px !important; border-top-color: #3a342e; }
+
+  /* ── Generic grid overrides ── */
+  .g-1-mob { grid-template-columns: 1fr !important; }
+  .g-2-mob { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ── CTA banner ── */
+  .cta-flex { flex-direction: column !important; padding: 32px 20px !important;
+              text-align: center !important; gap: 24px !important; }
+  .cta-flex > button, .cta-flex > a { width: 100% !important; }
+
+  /* ── Inner CTA (WhyFixxe) ── */
+  .inner-cta { flex-direction: column !important; padding: 32px 20px !important;
+               text-align: center !important; gap: 20px !important; }
+  .inner-cta > button, .inner-cta > a { width: 100% !important; }
+
+  /* ── Footer ── */
+  .footer-cols     { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+  .footer-brand-col{ grid-column: 1 / -1 !important; }
+  .footer-btm-row  { flex-direction: column !important; gap: 10px !important;
+                     align-items: center !important; text-align: center !important; }
+
+  /* ── Produtos page ── */
+  .prods-wrap    { flex-direction: column !important; padding-left: 20px !important; padding-right: 20px !important; }
+  .prods-sidebar { width: 100% !important; position: static !important; }
+  .filter-mob-btn{ display: flex !important; }
+  .sidebar-collapsible      { display: none; }
+  .sidebar-collapsible.open { display: block !important; }
+
+  /* ── Cart / Checkout ── */
+  .cart-grid     { grid-template-columns: 1fr !important; }
+  .checkout-grid { grid-template-columns: 1fr !important; }
+
+  /* ── B2B ── */
+  .b2b-hero-cols  { grid-template-columns: 1fr !important; }
+  .b2b-hero-cards { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ── Sobre ── */
+  .sobre-nums { grid-template-columns: repeat(2, 1fr) !important; }
+  .sobre-miss { grid-template-columns: 1fr !important; }
+
+  /* ── Misc ── */
+  .hide-mob { display: none !important; }
+  .full-mob { width: 100% !important; }
+}
