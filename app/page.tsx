@@ -179,7 +179,7 @@ function HeroSlideshow() {
 
       {/* Arrows */}
       {[{ dir: "prev", fn: prev, icon: "M15 18l-6-6 6-6", side: "left" as const }, { dir: "next", fn: next, icon: "M9 18l6-6-6-6", side: "right" as const }].map(({ dir, fn, icon, side }) => (
-        <button key={dir} onClick={fn} aria-label={dir} style={{ position: "absolute", [side]: "20px", top: "50%", transform: "translateY(-50%)", backgroundColor: `${C.bgCard}cc`, border: `1px solid ${C.border}`, borderRadius: "50%", width: "44px", height: "44px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.cream, backdropFilter: "blur(8px)" }}>
+        <button key={dir} onClick={fn} aria-label={dir} className="hero-arrow" style={{ position: "absolute", [side]: "20px", top: "50%", transform: "translateY(-50%)", backgroundColor: `${C.bgCard}cc`, border: `1px solid ${C.border}`, borderRadius: "50%", width: "44px", height: "44px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: C.cream, backdropFilter: "blur(8px)" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d={icon}/></svg>
         </button>
       ))}
@@ -315,7 +315,7 @@ function ProductsSection() {
             Ver catálogo completo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
-        <div className="g-2-mob" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
+        <div className="g-1-mob" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }}>
           {PRODUCTS.map((p, i) => <ProductCard key={p.name} p={p} delay={i * 80} />)}
         </div>
       </div>

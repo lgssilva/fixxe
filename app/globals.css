@@ -165,6 +165,9 @@ body {
   /* ── Section header row (flex space-between) ── */
   .sec-head-row { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
 
+  /* ── Hero arrows ── */
+  .hero-arrow   { display: none !important; }
+
   /* ── Hero ── */
   .hero-grid    { grid-template-columns: 1fr !important;
                   padding-top: 48px !important; padding-left: 20px !important; padding-right: 20px !important;
@@ -178,6 +181,9 @@ body {
   /* ── Generic grid overrides ── */
   .g-1-mob { grid-template-columns: 1fr !important; }
   .g-2-mob { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* ── Product card image: taller on mobile for 1-col layout ── */
+  .g-1-mob .product-card > div:first-child { aspect-ratio: 3/2 !important; }
 
   /* ── CTA banner ── */
   .cta-flex { flex-direction: column !important; padding: 32px 20px !important;
