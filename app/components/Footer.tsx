@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { C } from "@/app/lib/tokens";
 
+// v2
 export function Footer() {
   const cols = [
     { title: "Loja",    links: [["Todos os produtos", "/produtos"], ["PLA & PLA+", "/produtos?material=PLA"], ["PETG", "/produtos?material=PETG"], ["ABS & ASA", "/produtos?material=ABS"], ["Resina", "/produtos?material=Resina"], ["Promoções", "/produtos?promo=1"]] },
