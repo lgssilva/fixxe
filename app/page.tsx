@@ -735,7 +735,7 @@ function Footer() {
         </div>
 
         <div className="footer-btm-row" style={{ borderTop: `1px solid ${C.border}`, paddingTop: "24px", display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "8px" }}>
-          <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>© 2025 Fixxe — Cascais, Lisboa. Todos os direitos reservados.</p><a href="https://nexoscreative.com" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", textDecoration: "none", whiteSpace: "nowrap" }}><span style={{ fontSize: "12px", color: "#6b6560", whiteSpace: "nowrap" }}>Desenvolvido por</span><img src="/logo-nexos.svg" alt="Nexos Creative" height={20} style={{ opacity: 0.6, display: "inline-block", verticalAlign: "middle" }} /></a>
+          <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>©2026 Fixxe 3D — Cascais, Lisboa. Todos os direitos reservados.</p><a href="https://nexoscreative.com" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "6px", textDecoration: "none", whiteSpace: "nowrap" }}><span style={{ fontSize: "12px", color: "#6b6560", whiteSpace: "nowrap" }}>Desenvolvido por</span><img src="/logo-nexos.svg" alt="Nexos Creative" height={20} style={{ opacity: 0.6, display: "inline-block", verticalAlign: "middle" }} /></a>
           <div style={{ display: "flex", gap: "20px" }}>
             {["Instagram", "TikTok", "LinkedIn"].map(s => (
               <a key={s} href="#" style={{ fontSize: "13px", color: "#6b6560", textDecoration: "none", transition: "color 0.2s" }}
