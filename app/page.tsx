@@ -709,7 +709,7 @@ function Footer() {
               Impressão 3D de alta qualidade, feita em Cascais, para quem valoriza o detalhe.
             </p>
             <p style={{ fontSize: "13px", color: "#6b6560", margin: "0 0 8px" }}>📍 Cascais, Lisboa</p>
-            <p style={{ fontSize: "13px", color: "#6b6560", margin: "0 0 8px" }}>✉️ geral@fixxe.pt</p>
+            <p style={{ fontSize: "13px", color: "#6b6560", margin: "0 0 8px" }}>✉️ geral@fixxe3d.com</p>
             <p style={{ fontSize: "13px", color: "#6b6560", margin: 0 }}>📞 +351 912 345 678</p>
           </div>
 

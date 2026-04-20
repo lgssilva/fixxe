@@ -103,7 +103,7 @@ function Sidebar() {
           <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: C.orange, display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: "13px", color: "#fff", flexShrink: 0 }}>A</div>
           <div>
             <p style={{ margin: 0, fontSize: "13px", fontWeight: 600, color: C.cream }}>Admin</p>
-            <p style={{ margin: 0, fontSize: "11px", color: C.creamMuted }}>geral@fixxe.pt</p>
+            <p style={{ margin: 0, fontSize: "11px", color: C.creamMuted }}>geral@fixxe3d.com</p>
           </div>
         </div>
       </div>

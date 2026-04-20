@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Materiais de Impressão 3D | Fixxe",
     description: "PLA, PETG, ABS e Resina: conhece os materiais que a Fixxe usa para criar peças únicas.",
-    url: "https://fixxe.pt/materiais",
+    url: "https://fixxe3d.com/materiais",
   },
 };
 

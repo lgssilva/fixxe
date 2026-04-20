@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog | Fixxe — Impressão 3D",
     description: "Artigos, tutoriais e novidades sobre impressão 3D. Materiais, técnicas, projetos e dicas da equipa Fixxe.",
-    url: "https://fixxe.pt/blog",
+    url: "https://fixxe3d.com/blog",
   },
 };
 

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Projetos Personalizados | Fixxe",
     description: "Do teu ficheiro ao produto final. Orçamento gratuito e sem compromisso.",
-    url: "https://fixxe.pt/personalizado",
+    url: "https://fixxe3d.com/personalizado",
   },
 };
 

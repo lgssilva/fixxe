@@ -14,7 +14,7 @@ const ASSUNTOS = ["Orçamento", "Suporte técnico", "Parceria", "Imprensa", "Out
 
 const INFO = [
   { icon: "📍", label: "Morada",   valor: "Cascais, Lisboa, Portugal" },
-  { icon: "✉️", label: "Email",    valor: "geral@fixxe.pt"            },
+  { icon: "✉️", label: "Email",    valor: "geral@fixxe3d.com"            },
   { icon: "📞", label: "Telefone", valor: "+351 912 345 678"           },
   { icon: "🕐", label: "Horário",  valor: "Seg–Sex 9h–18h · Sáb 10h–14h" },
 ];

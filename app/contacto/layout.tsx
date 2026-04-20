@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Contacto | Fixxe",
     description: "Entra em contacto com a Fixxe. Respondemos em menos de 24 horas.",
-    url: "https://fixxe.pt/contacto",
+    url: "https://fixxe3d.com/contacto",
   },
 };
 

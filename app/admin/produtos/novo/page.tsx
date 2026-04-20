@@ -159,7 +159,7 @@ export default function NovoProduto() {
                   title="Gerar a partir do nome"
                 >⟳ Auto</button>
               </div>
-              <p style={{ fontSize: "11px", color: MUTED, margin: "4px 0 0" }}>fixxe.pt/produtos/{form.slug || "…"}</p>
+              <p style={{ fontSize: "11px", color: MUTED, margin: "4px 0 0" }}>fixxe3d.com/produtos/{form.slug || "…"}</p>
             </Field>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>

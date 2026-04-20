@@ -47,7 +47,7 @@ const INIT = {
       valores: "Qualidade sem compromisso. Sustentabilidade consciente. Inovação constante. Atenção ao detalhe. Serviço personalizado.",
     },
     contacto: {
-      email: "geral@fixxe.pt",
+      email: "geral@fixxe3d.com",
       telefone: "+351 912 345 678",
       morada: "Cascais, Lisboa, Portugal",
       horario: "Segunda a Sexta: 9h–18h | Sábado: 10h–14h",
@@ -57,11 +57,11 @@ const INIT = {
   config: {
     nomeSite:  "Fixxe",
     slogan:    "Impressão 3D de alta qualidade, feita em Cascais.",
-    email:     "geral@fixxe.pt",
+    email:     "geral@fixxe3d.com",
     telefone:  "+351 912 345 678",
     morada:    "Cascais, Lisboa, Portugal",
-    instagram: "https://instagram.com/fixxe.pt",
-    tiktok:    "https://tiktok.com/@fixxe.pt",
+    instagram: "https://instagram.com/fixxe3d.com",
+    tiktok:    "https://tiktok.com/@fixxe3d.com",
     linkedin:  "https://linkedin.com/company/fixxe",
   },
 };
@@ -384,7 +384,7 @@ export default function AdminConteudo() {
 
           <SectionCard title="Redes Sociais">
             {(["instagram", "tiktok", "linkedin"] as const).map(k => (
-              <Field key={k} label={k.charAt(0).toUpperCase() + k.slice(1) + " URL"} hint="URL completo, ex: https://instagram.com/fixxe.pt">
+              <Field key={k} label={k.charAt(0).toUpperCase() + k.slice(1) + " URL"} hint="URL completo, ex: https://instagram.com/fixxe3d.com">
                 <input style={inp} type="url" value={data.config[k]} onChange={e => setConfig(k, e.target.value)} />
               </Field>
             ))}

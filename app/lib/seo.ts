@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { Product } from "@/app/lib/tokens";
 
-export const BASE_URL = "https://fixxe.pt";
+export const BASE_URL = "https://fixxe3d.com";
 export const SITE_NAME = "Fixxe";
 export const DEFAULT_DESCRIPTION =
   "Peças únicas de impressão 3D de alta qualidade, feitas em Cascais. PLA, PETG, ABS e Resina. Decoração, organização e peças personalizadas.";
@@ -141,8 +141,8 @@ export function organizationSchema() {
       availableLanguage: "Portuguese",
     },
     sameAs: [
-      "https://instagram.com/fixxe.pt",
-      "https://tiktok.com/@fixxe.pt",
+      "https://instagram.com/fixxe3d.com",
+      "https://tiktok.com/@fixxe3d.com",
       "https://linkedin.com/company/fixxe",
     ],
   };

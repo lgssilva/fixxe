@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ALL_PRODUCTS } from "@/app/lib/tokens";
 
-const BASE_URL = "https://fixxe.pt";
+const BASE_URL = "https://fixxe3d.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
