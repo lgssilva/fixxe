@@ -1,0 +1,31 @@
+# Fixxe 3D
+
+> Empresa portuguesa de impressão 3D sediada em Cascais, Lisboa. Produzimos peças únicas em PLA, PETG, ABS e Resina com tecnologia Bambu Lab.
+
+## O que fazemos
+
+- Impressão 3D de alta qualidade em Cascais, Lisboa
+- Materiais: PLA, PETG, ABS, Resina fotopolimérica
+- Tecnologia: Bambu Lab X1 Carbon, P1S, A1 Mini
+- Serviços: decoração, organização, prototipagem, personalizado, B2B
+- Entrega em 3-5 dias úteis para todo o território nacional
+- Portes grátis acima de 50€ para Portugal Continental
+
+## Produtos e Serviços
+
+- Decoração & Arte: vasos, esculturas, molduras impressas em 3D
+- Organização: caixas, suportes, organizadores modulares
+- Ferramentas: peças técnicas, jigs, fixações industriais
+- Personalizado: do ficheiro ao produto final, qualquer ideia
+- B2B: produção em série para empresas, orçamentos em 4h, NDA garantido
+
+## Informações de Contacto
+
+- Website: https://fixxe3d.com
+- Email: geral@fixxe.pt
+- Telefone: +351 912 345 678
+- Morada: Cascais, Lisboa, Portugal
+
+## Sitemap
+
+https://fixxe3d.com/sitemap.xml
