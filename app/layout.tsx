@@ -38,6 +38,11 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
+  icons: {
+    icon: "/fixxe-favicon.svg",
+    shortcut: "/fixxe-favicon.svg",
+    apple: "/fixxe-favicon.svg",
+  },
   keywords: "impressão 3d, cascais, lisboa, pla, petg, abs, resina, decoração, organização, personalizado",
   authors: [{ name: SITE_NAME, url: BASE_URL }],
   creator: SITE_NAME,
